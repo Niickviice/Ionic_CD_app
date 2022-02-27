@@ -1,0 +1,7 @@
+{
+  "name": "C&D_app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
