@@ -1,0 +1,13 @@
+/* Solo funciona para este componente, así con cada css de cada componenete*/
+
+ion-card-title{
+  text-align: center;
+}
+
+ion-content{
+  --background: var(--ion-color-primary);
+}
+
+ion-card-content{
+  text-align: center;
+}
