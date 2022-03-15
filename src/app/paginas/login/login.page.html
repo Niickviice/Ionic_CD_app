@@ -7,16 +7,21 @@
     </ion-card-title>
   </ion-card-header>
   <ion-card-content>
+    <form [formGroup]='formulario'>
     <ion-item>
     <ion-label position="floating">email:</ion-label>
-    <ion-input type="email" > </ion-input>
+    <ion-input type="email" formControlName="email" > </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">contraseña:</ion-label>
-    <ion-input type="password" > </ion-input>
+    <ion-input type="password" formControlName="password" > </ion-input>
   </ion-item>
-  <ion-button>Enviar</ion-button>
+  <div>
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <ion-button (click)="enviarDatos()">Enviar</ion-button>
+</form>
   </ion-card-content>
 </ion-card>
 </ion-content>
