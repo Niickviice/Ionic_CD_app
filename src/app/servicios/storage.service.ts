@@ -5,6 +5,9 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class StorageService {
+  set(arg0: string, id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(public almacen: Storage) {
     // forzar a que espere a que termine el método asíncrono

@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
     const passwordF = this.formulario.get('password').value;
     console.log('email' +emailF );
 
-    const parametros = 'username =' + emailF + 'password =' + passwordF ;
+    const parametros = 'username=' + emailF + '&password=' + passwordF ;
     const opciones = {
       headers:{
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -48,8 +48,20 @@ export class LoginPage implements OnInit {
     //Obtener el token
     this.almacenservicio.almacen.get('token').then((token) =>{
       console.log('Token del almacenamiento:' + token);
+      const option = {
+        headers:{
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          Authorization: 'Bearer' + respuesta.token
+        }
+      };
+      this.http.get('http://localhost:8000/usuarios/me', option).subscribe((usuario:any)=>{
+        console.log('usuario en login:');
+        console.log(usuario);
+        this.almacenservicio.almacen.set('idUsuario', usuario.id).then(()=>{
+          this.enrutador.navigate(['folder/Inbox']);
+        });
+      });
     });
-    this.enrutador.navigate(['folder/Inbox']);
   },
   (error)=>{
     console.log('ocurrio un error');
