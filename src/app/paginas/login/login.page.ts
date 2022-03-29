@@ -30,6 +30,7 @@ export class LoginPage implements OnInit {
     const emailF = this.formulario.get('email').value;
     const passwordF = this.formulario.get('password').value;
     console.log('email' +emailF );
+    console.log('password' +passwordF);
 
     const parametros = 'username=' + emailF + '&password=' + passwordF ;
     const opciones = {
@@ -41,9 +42,9 @@ export class LoginPage implements OnInit {
 
     this.http.post('http://localhost:8000/token', parametros, opciones)
     .subscribe((respuesta: any )=>{
-    console.log('token:' + respuesta.acces_token);
+    console.log('token papu:' + respuesta.access_token);
     //Guardar el Token en el STORAGE
-    this.almacenservicio.almacen.set('token', respuesta.token);
+    this.almacenservicio.almacen.set('token', respuesta.access_token);
 
     //Obtener el token
     this.almacenservicio.almacen.get('token').then((token) =>{
@@ -51,13 +52,14 @@ export class LoginPage implements OnInit {
       const option = {
         headers:{
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          Authorization: 'Bearer' + respuesta.token
+          Authorization: 'Bearer ' + respuesta.access_token
         }
       };
-      this.http.get('http://localhost:8000/usuarios/me', option).subscribe((usuario:any)=>{
+      this.http.get('http://localhost:8000/usuarios/me', option).subscribe((usuario: any)=>{
         console.log('usuario en login:');
         console.log(usuario);
         this.almacenservicio.almacen.set('idUsuario', usuario.id).then(()=>{
+          console.log(this.enrutador);
           this.enrutador.navigate(['folder/Inbox']);
         });
       });
