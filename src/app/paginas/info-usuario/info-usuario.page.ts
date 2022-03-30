@@ -13,20 +13,21 @@ export class InfoUsuarioPage implements OnInit {
 
 
   constructor(private almacenServicio: StorageService, private http:HttpClient) {
-    this.almacenServicio.almacen.get('token').then(()=>{
-    this.almacenServicio.almacen.get('idUsuario').then((idUsuario)=>{
-      const option = {
-        headers:{
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          Authorization: 'Bearer ' + access_token
-        }
-      };
-      this.http.get('http://localhost:8000/usuario/' + idUsuario, option)
-      .subscribe((infoUsuario)=>{
-       this.usuario = infoUsuario;
-      });
+    this.almacenServicio.almacen.get('token').then((token)=>{
+      this.almacenServicio.almacen.get('idUsuario').then((idUsuario)=>{
+        const option = {
+          headers:{
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Authorization: 'Bearer ' + token
+          }
+        };
+        this.http.get('http://localhost:8000/usuario/' + idUsuario, option)
+        .subscribe((infoUsuario)=>{
+          console.log("usuario:", infoUsuario);
+          this.usuario = infoUsuario;
+        });
 
-    });
+      });
     });
    }
 
