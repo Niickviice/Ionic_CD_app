@@ -23,7 +23,7 @@ export class InfoUsuarioPage implements OnInit {
         };
         this.http.get('http://localhost:8000/usuario/' + idUsuario, option)
         .subscribe((infoUsuario)=>{
-          console.log("usuario:", infoUsuario);
+          console.log('usuario:', infoUsuario);
           this.usuario = infoUsuario;
         });
 

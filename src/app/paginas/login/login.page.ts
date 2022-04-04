@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
 
     this.http.post('http://localhost:8000/token', parametros, opciones)
     .subscribe((respuesta: any )=>{
-    console.log('token papu:' + respuesta.access_token);
+    console.log('token:' + respuesta.access_token);
     //Guardar el Token en el STORAGE
     this.almacenservicio.almacen.set('token', respuesta.access_token).then(()=>{
       //Obtener el token
@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
         });
       });
 
-    });    
+    });
   },
   (error)=>{
     console.log('ocurrio un error');

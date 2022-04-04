@@ -1,5 +1,6 @@
+import { TokenGuardiaService } from './servicios/token-guardia.service';
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -17,7 +18,13 @@ const routes: Routes = [
   },
   {
     path: 'info-usuario',
-    loadChildren: () => import('./paginas/info-usuario/info-usuario.module').then( m => m.InfoUsuarioPageModule)
+    loadChildren: () => import('./paginas/info-usuario/info-usuario.module').then( m => m.InfoUsuarioPageModule),
+    canActivate:[TokenGuardiaService]
+  },
+  {
+    path: 'noticias',
+    loadChildren: () => import('./paginas/noticias/noticias.module').then( m => m.NoticiasPageModule),
+    canActivate:[TokenGuardiaService]
   }
 ];
 
