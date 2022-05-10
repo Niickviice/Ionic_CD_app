@@ -17,6 +17,12 @@ export const URL_API_ELIMINAR_USUARIO = URL_API_OBTEN_USUARIO;
 export const URL_API_ACTUALIZAR_USUARIO = URL_API_OBTEN_USUARIO;
 export const URL_API_GUARDAR_AVATAR_USUARIO = URL_SERVIDOR + "/usuario/{idUsuario}/avatar";
 
-export const URL_API_OBTENER_USUARIOS =  URL_SERVIDOR + "/usuarios";
+export const URL_API_GUARDAR_Y_CLASIFICAR_FOTO_USUARIO = URL_SERVIDOR + "/usuarios/{idUsuario}/foto";
+export const URL_API_OBTENER_FOTO_CLASIFICADA =  URL_SERVIDOR + "/foto/{idFoto}";
+
+
+export const URL_API_OBTENER_FOTOS_CLASIFICADAS_USUARIO =  URL_SERVIDOR + "/usuario/{idUsuario}/fotos";
+
+export const URL_API_OBTENER_USUARIOS =  URL_SERVIDOR + "/usuariosCompletos";
 
 

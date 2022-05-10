@@ -75,7 +75,13 @@ const routes: Routes = [
     path: 'tomar-foto-archivos',
     loadChildren: () => import('./paginas/tomar-foto-archivos/tomar-foto-archivos.module').then( m => m.TomarFotoArchivosPageModule),
     canActivate:[TokenGuardiaService]
+  },
+  {
+    path: 'foto-clasificada',
+    loadChildren: () => import('./paginas/foto-clasificada/foto-clasificada.module').then( m => m.FotoClasificadaPageModule),
+    canActivate:[TokenGuardiaService]
   }
+
 
 ];
 

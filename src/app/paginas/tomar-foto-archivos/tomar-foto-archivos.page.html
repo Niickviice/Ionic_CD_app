@@ -1,9 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>tomar-foto-archivos</ion-title>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="/tomar-foto"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Archivos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content>  
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
 
+  <ion-card class="info-carta">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Foto de mis archivos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>  
+      <form [formGroup]="formulario" *ngIf="!mostrarSpinner">
+        <ion-input type="hidden" formControlName="archivoNombre"></ion-input>          
+        <ion-item>
+          <input style="margin:0 auto;" type="file" (change)="enArchivoSeleccionado($event)" name="archivo"/>        
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.archivoNombre.errors?.required">
+          Requerido
+        </div>
+        <div class="ion-text-center ion-padding">
+          <ion-button (click)="buscarRaza()" 
+                      [disabled]="formulario.invalid">Buscar raza</ion-button>          
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -8,9 +8,23 @@
 </ion-header>
 
 <ion-content>  
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>  
+  <div *ngIf="!mostrarSpinner">
+    <div *ngIf="foto" class="ion-text-center ion-padding foto">
+      <ion-img [src]="foto.rutaWebTemporal" ></ion-img>
+    </div>
+    <div *ngIf="foto" class="ion-text-center ion-padding">
+      <ion-button (click)="buscarRaza(foto)">Buscar raza</ion-button>
+    </div>
+  </div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button (click)="tomarFoto()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>  
 </ion-content>

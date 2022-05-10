@@ -1,9 +1,31 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>mis-fotos</ion-title>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mis fotos</ion-title>    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="ion-padding ion-text-center ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div class="error ion-padding" *ngIf="mensajeError">
+    <strong>{{mensajeError}}</strong>
+  </div>
+  <div class="ion-text-center ion-margin-top" *ngIf="fotos?.length>0">
+    Da click en la foto de tu interés para ver más información.
+  </div>
+  <ion-grid *ngIf="!mostrarSpinner">    
+    <ion-row>
+      <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="3" *ngFor="let foto of fotos">
+        <div class="contenedor-imagen-preview" style="background-image:url('{{URL_SERVIDOR_IMAGEN}}/{{foto.ruta}}')" routerLink="/foto-clasificada" [queryParams]="{idFoto:foto.id}"></div>
+        <div class="ion-text-center"><ion-button color="success" routerLink="/foto-clasificada" [queryParams]="{idFoto:foto.id}">Detalles</ion-button></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="fotos?.length===0" class="ion-text-center">
+    <h3>Aún no tienes fotos. Puedes tomar una nueva foto en la sección de <a routerLink="/mis-fotos">Mis fotos</a></h3>
+  </div>
 </ion-content>

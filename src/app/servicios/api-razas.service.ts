@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { URL_API_ACTUALIZAR_USUARIO, URL_API_CREAR_USUARIO, URL_API_ELIMINAR_USUARIO, URL_API_GUARDAR_AVATAR_USUARIO, URL_API_OBTENER_USUARIOS, URL_API_OBTEN_USUARIO } from '../app.constantes';
+import { URL_API_ACTUALIZAR_USUARIO, URL_API_CREAR_USUARIO, URL_API_ELIMINAR_USUARIO, URL_API_GUARDAR_AVATAR_USUARIO, URL_API_GUARDAR_Y_CLASIFICAR_FOTO_USUARIO, URL_API_OBTENER_FOTOS_CLASIFICADAS_USUARIO, URL_API_OBTENER_FOTO_CLASIFICADA, URL_API_OBTENER_USUARIOS, URL_API_OBTEN_USUARIO } from '../app.constantes';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -163,6 +163,31 @@ export class ApiRazasService {
   guardarAvatarUsuarioMe(body,callbackOk,callbackError){
     this.obtenIdUsuario((idUsuario)=>{
       this.guardarAvatarUsuario(idUsuario,body,callbackOk,callbackError);
+    });
+  }
+
+  guardarYClasificarFoto(body,callbackOk,callbackError){
+    this.obtenIdUsuario((idUsuario)=>{
+      const url =URL_API_GUARDAR_Y_CLASIFICAR_FOTO_USUARIO.replace("{idUsuario}",idUsuario);
+      this.solicitudPostConToken(url,body,{},callbackOk,callbackError)
+    });    
+  }
+
+  obtenerFotoClasificadaPorId(idFoto,callbackOk,callbackError){
+    const url = URL_API_OBTENER_FOTO_CLASIFICADA.replace("{idFoto}",idFoto);
+    this.solicitudGetConToken(url,{},callbackOk,callbackError);
+  }
+
+  obtenerFotosClasificadasUsuario(tamLote, pagina,callbackOk,callbackError){
+    this.obtenIdUsuario((idUsuario)=>{
+      const url = URL_API_OBTENER_FOTOS_CLASIFICADAS_USUARIO.replace("{idUsuario}",idUsuario);
+      const opc = {
+        params:{
+          lote:tamLote,
+          pag:pagina
+        }
+      };
+      this.solicitudGetConToken(url,opc,callbackOk,callbackError);
     });
   }
 
