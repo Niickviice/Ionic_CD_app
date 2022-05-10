@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="editar-cuenta"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cancelar cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="info-carta">
+    <ion-card-header color="cabecera">
+      <ion-card-title>destruir mi cuenta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>        
+      <div class="aviso">        
+        <strong class="texto-alerta">IMPORTANTE:</strong> si cancelas tu cuenta <strong>ya no podrás recuperarla</strong>.
+      </div>
+      <div class="aviso">          
+        Escribe <strong>destruir mi cuenta</strong> en el siguiente recuadro y presiona el botón <strong>Eliminar</strong> para borrar tu cuenta.        
+      </div>      
+      <form [formGroup]="formulario">                
+        <ion-item>
+          <ion-input type="hidden" formControlName="confirmar"></ion-input>          
+          <ion-label position="floating">Escribe <strong>destruir mi cuenta</strong>:</ion-label>
+          <ion-input placeholder="acepto" type="string" formControlName="confirmarTexto"></ion-input>          
+        </ion-item>                
+        <div class="error" 
+             *ngIf="formulario.controls.confirmarTexto.errors?.required">
+             Requerido         
+        </div>
+        <div class="error" 
+             *ngIf="!formulario.controls.confirmarTexto.errors?.required && formulario.controls.confirmarTexto.errors?.diferente">
+             Debes escribir <strong>destruir mi cuenta</strong>        
+        </div>
+        <div class="mensaje-respuesta">
+          <ion-label color="danger">{{mensajeError}}</ion-label>
+        </div>
+        <div class="boton-guardar-contenedor">
+          <ion-button color="danger" (click)="eliminarCuenta()" 
+                      [disabled]="formulario.invalid">destruir mi cuenta</ion-button>          
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

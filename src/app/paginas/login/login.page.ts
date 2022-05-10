@@ -2,7 +2,9 @@ import { StorageService } from './../../servicios/storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { URL_API_OBTEN_TOKEN, URL_API_OBTEN_USUARIO_ME } from 'src/app/app.constantes';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +16,35 @@ export class LoginPage implements OnInit {
   formulario: FormGroup;
   // eslint-disable-next-line @typescript-eslint/ban-types
   mensajeError: String;
+  expiro:boolean;
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  constructor(private ConstForm: FormBuilder, private http: HttpClient, private enrutador: Router, private almacenservicio: StorageService){
+  constructor(private activatedRoute:ActivatedRoute, 
+              private ConstForm: FormBuilder, 
+              private http: HttpClient, 
+              private enrutador: Router, 
+              private menuCtrl:MenuController,
+              private almacenservicio: StorageService){
     this.formulario = this.ConstForm.group({
-      email:['Correo electrónico ', []],
-      password:['password', []]
+      email:['arcade_fire@gmail.com', []],
+      password:['1234', []]
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+  }
+
+  //tan pronto esté lista la aplicacion
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false); // escondemos el menú lateral
+    this.expiro = false;
+    //reseteamos el formulario
+    this.formulario.reset();
+    //obtenemos los parametros del query string
+    this.activatedRoute.queryParams.subscribe((params)=>{
+      if(params.expiro){
+        this.expiro = params.expiro === "true";
+      }
+    });
   }
 
   enviarDatos(){
@@ -40,7 +62,7 @@ export class LoginPage implements OnInit {
       }
     };
 
-    this.http.post('http://localhost:8000/token', parametros, opciones)
+    this.http.post(URL_API_OBTEN_TOKEN, parametros, opciones)
     .subscribe((respuesta: any )=>{
     console.log('token:' + respuesta.access_token);
     //Guardar el Token en el STORAGE
@@ -54,12 +76,16 @@ export class LoginPage implements OnInit {
             Authorization: 'Bearer ' + respuesta.access_token
           }
         };
-        this.http.get('http://localhost:8000/usuarios/me', option).subscribe((usuario: any)=>{
+        this.http.get(URL_API_OBTEN_USUARIO_ME, option).subscribe((usuario: any)=>{
           console.log('usuario en login:');
           console.log(usuario);
           this.almacenservicio.almacen.set('idUsuario', usuario.id).then(()=>{
-            console.log(this.enrutador);
-            this.enrutador.navigate(['folder/Inbox']);
+            this.almacenservicio.almacen.set("nombreUsuario",usuario.nombre).then(()=>{              
+              console.log(this.enrutador);
+              //mostramos el menú lateral
+              this.menuCtrl.enable(true);              
+              this.enrutador.navigate(['/tomar-foto']);
+            });
           });
         });
       });
@@ -70,10 +96,10 @@ export class LoginPage implements OnInit {
     console.log('ocurrio un error');
     console.log(error);
     // eslint-disable-next-line eqeqeq
-    if(error.status == 403){
+    if(error.status === 403 || error.status===401){
       this.mensajeError = 'Email o Password son incorrectos';
     } else{
-      this.mensajeError ='Error en el srvidor, intente más tarde';
+      this.mensajeError ='Error en el servidor, intente más tarde';
     }
   });
 

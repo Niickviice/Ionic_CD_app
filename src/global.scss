@@ -24,3 +24,57 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.info-carta ion-list{
+    margin-top: 0px;
+}
+
+.info-carta ion-card-header{
+    padding:10px; 
+}
+
+.info-carta ion-card-title{    
+    font-size:1.3em;
+    text-align: center;
+}
+
+.contenedor-spinner{
+    text-align: center;
+}
+
+.mensaje-respuesta{
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+    text-align: center;
+}
+
+.mensaje-exito{    
+    font-size: 2em;
+}
+
+.error{    
+    color:red;
+    text-align: center;
+}
+
+.imagen-avatar{
+    border:1px solid gray;
+    border-radius: 50%;
+    max-width: 200px;
+}
+
+@media (max-width: 700px) {
+    .contenedor-botones{
+        width:100px;
+    }
+}
+
+
+@media (min-width: 485px) {
+    ion-header ion-toolbar ion-title{
+        text-align: center;
+        position:relative;
+        left:-56px;
+    }
+}

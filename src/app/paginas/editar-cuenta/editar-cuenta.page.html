@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="mi-cuenta"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editando mi cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Información de mi cuenta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-padding ion-text-center">
+        <ion-label color="danger"><strong>Importante:</strong>&nbsp;</ion-label>
+        <span style="color:black">Si cambias tu email se cerrará tu sesión y tendrás que volver a ingresar.</span>        
+      </div>
+      <form [formGroup]="formulario">
+        <ion-item>
+          <ion-label position="floating">email:</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.email.errors?.required">
+          Requerido
+        </div>
+        <div class="error" 
+             *ngIf="formulario.controls.email.errors?.email">
+          Debe ser un email válido
+        </div>
+        <ion-item>
+          <ion-label position="floating">nombre:</ion-label>
+          <ion-input type="string" formControlName="nombre"></ion-input>
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.nombre.errors?.required">
+          Requerido
+        </div>
+        <ion-item>
+          <ion-label position="floating">teléfono:</ion-label>
+          <ion-input type="string" formControlName="telefono"></ion-input>
+        </ion-item>        
+        <div class="mensaje-respuesta" *ngIf="datosGuardados">
+          <ion-label color="success">Los datos han sido actualizados</ion-label>
+        </div>
+        <div class="ion-padding ion-text-center" *ngIf="!emailOk">
+          <ion-label color="danger"><strong>Ya existe un usuario con ese email</strong>&nbsp;</ion-label>
+        </div>
+        <div class="boton-guardar-contenedor">
+          <ion-button [disabled]="formulario.invalid" (click)="guardarInfo()">Guardar</ion-button>          
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Cambiar mi password</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center ion-margin-top">                      
+            <ion-button class="boton-editar" routerLink="/editar-password">Modificar password</ion-button>                  
+    </ion-card-content>    
+  </ion-card>
+
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="danger">
+      <ion-card-title>Cancelar mi cuenta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center ion-margin-top">
+            <ion-button class="boton-editar" routerLink="/eliminar-cuenta">Cancelar cuenta</ion-button>
+    </ion-card-content>    
+  </ion-card>
+</ion-content>

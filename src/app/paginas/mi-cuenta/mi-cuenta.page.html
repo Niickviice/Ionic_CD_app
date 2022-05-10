@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mi cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>  
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Datos de mi cuenta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-text-center ion-padding" *ngIf="!mostrarSpinner">
+        <img class="imagen-avatar" src="{{urlServidorImagen}}/{{usuario?.ruta_avatar}}" onerror="this.src='assets/imagenes/avatardefault.png';"/>    
+        <div class="contenedor-boton">
+          <a routerLink="/editar-foto">Cambiar mi avatar</a>
+        </div>
+      </div>
+      <ion-list class="info-list">    
+        <ion-item>
+          <ion-icon name="mail" ios="mail-outline" md="mail-sharp"></ion-icon>
+          <ion-label class="info-renglon" text-wrap><strong class="info-param">email</strong>: <span class="info-valor">{{usuario?.email_user}}</span></ion-label>
+        </ion-item>      
+        <ion-item >
+          <ion-icon name="happy" ios="happy-outline" md="happy-sharp"></ion-icon>
+          <ion-label class="info-renglon" text-wrap><strong class="info-param">nombre</strong>: <span class="info-valor">{{usuario?.nombre}}</span></ion-label>      
+        </ion-item>
+        <ion-item >
+          <ion-icon name="call" ios="call-outline" md="call-sharp"></ion-icon>
+          <ion-label class="info-renglon" text-wrap><strong class="info-param">teléfono</strong>: <span class="info-valor">{{usuario?.telefono}}</span></ion-label>      
+        </ion-item>
+        <ion-item >
+          <ion-icon name="calendar" ios="calendar-outline" md="calendar-sharp"></ion-icon>
+          <ion-label class="info-renglon" text-wrap><strong class="info-param">fecha registro</strong>: <span class="info-valor">{{usuario?.fecha_registro | date: 'yyyy-MM-dd'}}</span></ion-label>      
+        </ion-item>        
+      </ion-list>
+      <div class="contenedor-boton">
+        <ion-button class="boton-editar" routerLink="/editar-cuenta" >Editar</ion-button>
+      </div>
+    </ion-card-content>        
+  </ion-card>  
+</ion-content>

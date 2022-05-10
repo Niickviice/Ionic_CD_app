@@ -74,6 +74,42 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** COLOR menu (menu principal de la aplicación) **/
+  --ion-color-menu: #3880ff;
+  --ion-color-menu-rgb: 56, 128, 255;
+  --ion-color-menu-contrast: #ffffff;
+  --ion-color-menu-contrast-rgb: 255, 255, 255;
+  --ion-color-menu-shade: #3171e0;
+  --ion-color-menu-tint: #4c8dff;
+
+  .ion-color-menu{
+    --ion-color-base: var(--ion-color-menu);
+    --ion-color-base-rgb: var(--ion-color-menu-rgb);
+    --ion-color-contrast: var(--ion-color-menu-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-menu-contrast-rgb);
+    --ion-color-shade: var(--ion-color-menu-shade);
+    --ion-color-tint: var(--ion-color-menu-tint);
+  }
+
+  /** COLOR cabecera (cabecera de las cartas) **/
+  --ion-color-cabecera: #92949c;
+  --ion-color-cabecera-rgb: 146, 148, 156;
+  --ion-color-cabecera-contrast: #ffffff;
+  --ion-color-cabecera-contrast-rgb: 255, 255, 255;
+  --ion-color-cabecera-shade: #808289;
+  --ion-color-cabecera-tint: #9d9fa6;
+
+
+  .ion-color-cabecera{
+    --ion-color-base: var(--ion-color-cabecera);
+    --ion-color-base-rgb: var(--ion-color-cabecera-rgb);
+    --ion-color-contrast: var(--ion-color-cabecera-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-cabecera-contrast-rgb);
+    --ion-color-shade: var(--ion-color-cabecera-shade);
+    --ion-color-tint: var(--ion-color-cabecera-tint);
+  }
+
 }
 
 @media (prefers-color-scheme: dark) {

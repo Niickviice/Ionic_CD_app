@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="mi-cuenta"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cambiar mi avatar</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="info-carta">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Mi foto de avatar</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+        <ion-spinner></ion-spinner>
+      </div>
+      <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+        <ion-label color="danger">{{mensajeError}}</ion-label>
+      </div>
+
+      <div class="ion-text-center ion-padding" *ngIf="!mostrarSpinner">
+        <img class="imagen-avatar" src="{{urlServidorImagen}}/{{rutaAvatar}}" onerror="this.onerror=null;this.src='assets/imagenes/avatardefault.png';" />
+      </div>
+
+      <form [formGroup]="formulario" *ngIf="!mostrarSpinner">
+        <ion-input type="hidden" formControlName="archivoNombre"></ion-input>          
+        <ion-item>
+          <input style="margin:0 auto;" type="file" (change)="enArchivoSeleccionado($event)" name="archivo"/>        
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.archivoNombre.errors?.required">
+          Requerido
+        </div>
+        <div class="ion-text-center ion-padding" *ngIf="datosGuardados">
+          <ion-label color="success"><strong>Avatar de tu cuenta actualizado</strong></ion-label>
+        </div>
+        <div class="ion-text-center ion-padding">
+          <ion-button (click)="guardarArchivo()" 
+                      [disabled]="formulario.invalid">Guardar</ion-button>          
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

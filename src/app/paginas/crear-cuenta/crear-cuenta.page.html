@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="info-carta">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Ingresa tus datos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formulario">
+
+        <ion-item>
+          <ion-label position="floating">nombre:</ion-label>
+          <ion-input type="string" formControlName="nombre"></ion-input>
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.nombre.errors?.required">
+          Requerido
+        </div>
+        <ion-item>
+          <ion-label position="floating">email:</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.email.errors?.required">
+          Requerido
+        </div>
+        <div class="error" 
+             *ngIf="formulario.controls.email.errors?.email">
+          Debe ser un email válido
+        </div>
+        <ion-item>
+          <ion-label position="floating">Password:</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>          
+        </ion-item>
+        <div class="error" *ngIf="formulario.controls.password.errors?.required">
+          Requerido
+        </div>
+        <div class="error" 
+             *ngIf="formulario.controls.password.errors?.minlength">
+          Debe tener al menos 5 caracteres
+        </div>
+        <ion-item>
+          <ion-label position="floating">Confirmar password:</ion-label>
+          <ion-input type="password" formControlName="confirmarPassword"></ion-input>          
+        </ion-item>
+        <div class="error" 
+             *ngIf="formulario.controls.confirmarPassword.errors?.required">
+             Requerido          
+        </div>
+        <div class="error" 
+             *ngIf="formulario.controls.confirmarPassword.errors?.diferente">
+             La confirmación del password no coincide          
+        </div>       
+        <ion-item class="contenedor-captcha">
+          <re-captcha style="margin:0 auto;" #captcha (resolved)="enCaptchaResuelto($event)" [siteKey]="recaptchaKey"></re-captcha>
+        </ion-item>         
+        <div class="error" 
+             *ngIf="!captchaOK">
+             El captcha es requerido
+        </div>       
+        <div class="mensaje-respuesta">
+          <ion-label color="danger">{{mensajeError}}</ion-label>
+        </div>
+        <div class="mensaje-respuesta" *ngIf="datosGuardados">
+          <div class="mensaje-exito">
+            <ion-label color="success"><strong>Cuenta creada</strong></ion-label>
+            <p>Redirigiendo a <a href="/login">Login</a> ...</p>
+          </div>
+        </div>
+        <div class="boton-guardar-contenedor">
+          <ion-button #botonGuardar (click)="crearCuenta()" 
+                      [disabled]="formulario.invalid || captchaOK===false">Guardar</ion-button>
+          <ion-button (click)="mostrarLogin()" >Cancelar</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

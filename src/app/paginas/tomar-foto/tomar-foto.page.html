@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tomar una foto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>  
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Origen de la foto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2 class="ion-text-center ion-padding" style="color:black">Selecciona la fuente de la foto:</h2>
+      <div class="ion-text-center ion-padding">
+        <ion-button routerLink="/tomar-foto-camara">Tomar foto con la cámara</ion-button>
+        <ion-button routerLink="/tomar-foto-archivos">Tomar foto de mis archivos</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
