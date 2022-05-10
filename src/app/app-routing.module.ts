@@ -20,12 +20,7 @@ const routes: Routes = [
     path: 'logout',
     loadChildren: () => import('./paginas/logout/logout.module').then( m => m.LogoutPageModule)
   },
-  //rutas protegidas
-  {
-    path: 'noticias',
-    loadChildren: () => import('./paginas/noticias/noticias.module').then( m => m.NoticiasPageModule),
-    canActivate:[TokenGuardiaService]
-  },
+  //rutas protegidas  
   {
     path: 'mi-cuenta',
     loadChildren: () => import('./paginas/mi-cuenta/mi-cuenta.module').then( m => m.MiCuentaPageModule),

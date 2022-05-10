@@ -20,6 +20,7 @@ export const URL_API_GUARDAR_AVATAR_USUARIO = URL_SERVIDOR + "/usuario/{idUsuari
 export const URL_API_GUARDAR_Y_CLASIFICAR_FOTO_USUARIO = URL_SERVIDOR + "/usuarios/{idUsuario}/foto";
 export const URL_API_OBTENER_FOTO_CLASIFICADA =  URL_SERVIDOR + "/foto/{idFoto}";
 
+export const URL_API_OBTENER_RAZAS =  URL_SERVIDOR + "/razasCompletas";
 
 export const URL_API_OBTENER_FOTOS_CLASIFICADAS_USUARIO =  URL_SERVIDOR + "/usuario/{idUsuario}/fotos";
 

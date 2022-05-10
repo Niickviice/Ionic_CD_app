@@ -1,9 +1,40 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>razas</ion-title>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Razas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-segment (ionChange)="filtrar()" [(ngModel)]="filtroEspecie" style="margin-top:5px">
+    <ion-segment-button value="gato">Gatos</ion-segment-button>
+    <ion-segment-button value="perro">Perros</ion-segment-button>
+    <ion-segment-button value="todos">Todos</ion-segment-button>
+  </ion-segment>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>  
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Razas en el sistema</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-text-center ion-padding-top">Estas son las razas que actualmente reconoce la aplicación.</div>
+      <ion-list>
+        <ion-item *ngFor="let raza of razas">
+          <ion-label text-wrap>
+            <h3><strong>Raza:</strong>{{raza.raza_alias}}</h3>
+            <h3><strong>Especie:</strong>{{raza.especie}}</h3>
+            <h3><strong>Descripción:</strong></h3>
+            <p>{{raza.descripcion}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

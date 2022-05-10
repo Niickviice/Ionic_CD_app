@@ -28,7 +28,7 @@ export class EliminarCuentaPage implements OnInit {
 
   eliminarCuenta(){
     
-    if(this.formulario.get("confirmarTexto").value!=="acepto"){    
+    if(this.formulario.get("confirmarTexto").value!=="destruir mi cuenta"){    
       this.mensajeError="Error, no has escrito en el recuadro el texto: acepto"
     }else {
       this.api.eliminarUsuarioMe((resp)=>{
