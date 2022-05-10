@@ -21,6 +21,7 @@ export const URL_API_GUARDAR_Y_CLASIFICAR_FOTO_USUARIO = URL_SERVIDOR + "/usuari
 export const URL_API_OBTENER_FOTO_CLASIFICADA =  URL_SERVIDOR + "/foto/{idFoto}";
 
 export const URL_API_OBTENER_RAZAS =  URL_SERVIDOR + "/razasCompletas";
+export const URL_API_OBTENER_RAZA_POR_ID =  URL_SERVIDOR + "/razas/{idRaza}";
 
 export const URL_API_OBTENER_FOTOS_CLASIFICADAS_USUARIO =  URL_SERVIDOR + "/usuario/{idUsuario}/fotos";
 

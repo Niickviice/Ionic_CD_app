@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="/razas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Información de raza</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mensajeError">
+    <ion-label color="danger">{{mensajeError}}</ion-label>
+  </div>
+  <div class="ion-text-center ion-padding ion-margin-top" *ngIf="mostrarSpinner">
+    <ion-spinner></ion-spinner>
+  </div>  
+  <ion-card class="info-carta" *ngIf="!mostrarSpinner">
+    <ion-card-header color="cabecera">
+      <ion-card-title>Información de la raza</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>      
+      <h3 style="margin-top:1em"><strong>Raza:</strong>{{raza?.raza_alias}}</h3>
+      <h3 style="margin-top:1em"><strong>Especie:</strong>{{raza?.especie}}</h3>
+      <h3 style="margin-top:1em"><strong>Descripción:</strong></h3>
+      <p style="margin-top:1em">El siamés moderno es una raza de gato proveniente del antiguo reino de Siam, actualmente Tailandia. En 1882 fueron llevados a Inglaterra y en 1890 a Estados Unidos.
+
+        Este tipo de siamés, desde 1950, fue ganando protagonismo y resultó ser el elegido por los criadores y jueces de exposiciones felinas. Tal vez sea por esto que se acuñó el nombre "siamés" para el siamés moderno, ya que es la variedad que durante todas estas décadas ha participado a nivel de competición.</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

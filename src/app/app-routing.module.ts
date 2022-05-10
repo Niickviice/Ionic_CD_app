@@ -75,7 +75,11 @@ const routes: Routes = [
     path: 'foto-clasificada',
     loadChildren: () => import('./paginas/foto-clasificada/foto-clasificada.module').then( m => m.FotoClasificadaPageModule),
     canActivate:[TokenGuardiaService]
+  },  {
+    path: 'raza-info',
+    loadChildren: () => import('./raza-info/raza-info.module').then( m => m.RazaInfoPageModule)
   }
+
 
 
 ];
