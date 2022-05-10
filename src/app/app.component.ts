@@ -19,7 +19,10 @@ export class AppComponent {
   
   nombreUsuario:string="";
   
-  constructor(private apiComunitarios:ApiRazasService, private almacenServ:StorageService) {        
+  constructor(private api:ApiRazasService, private almacenServ:StorageService) {            
+  }
+
+  ngOnInit(){
     this.obtenerUsuario();
   }
 
@@ -28,7 +31,7 @@ export class AppComponent {
     this.almacenServ.almacen.get("token").then((token)=>{
       if(token!==null){
         console.log("token del usuario:",token);
-        this.apiComunitarios.obtenUsuarioMe((usuario)=>{
+        this.api.obtenUsuarioMe((usuario)=>{
           this.nombreUsuario = usuario.nombre;
           console.log("nombre del usuario:",this.nombreUsuario);          
         },
